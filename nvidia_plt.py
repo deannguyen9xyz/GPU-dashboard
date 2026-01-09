@@ -36,7 +36,7 @@ def update(i):
         mem_data.append(mem)
         util_data.append(util)
 
-        # Keep a window of the last 40 readings for the display
+        # Keep a window of the last 60 readings for the display
         if len(time_data) > 60:
             time_data.pop(0)
             temp_data.pop(0)
@@ -86,5 +86,3 @@ finally:
     # Ensure NVML shuts down when the window is closed
     pynvml.nvmlShutdown()
     print("NVML Shutdown safely.")
-
-# Improve using Streamlit or Dash for a web-based dashboard in future iterations.
