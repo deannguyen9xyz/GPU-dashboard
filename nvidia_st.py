@@ -3,14 +3,14 @@ import pandas as pd
 import streamlit as st
 from datetime import datetime
 
-# 1. Streamlit Page Configuration
+# Streamlit Page Configuration
 st.set_page_config(
     page_title="GPU Live Monitor",
     page_icon="🚀",
     layout="wide"
 )
 
-# 2. Initialize NVML once
+# Initialize NVML once
 @st.cache_resource
 def get_gpu_handle():
     try:
@@ -21,11 +21,11 @@ def get_gpu_handle():
 
 handle = get_gpu_handle()
 
-# 3. Persistent Data Storage
+# Persistent Data Storage
 if 'history' not in st.session_state:
     st.session_state.history = pd.DataFrame(columns=['Time', 'Temp', 'Memory', 'Load'])
 
-# 4. The Dashboard Fragment
+# The Dashboard Fragment
 @st.fragment(run_every=5.0) 
 def render_gpu_data():
     if handle:
@@ -40,7 +40,7 @@ def render_gpu_data():
         new_entry = pd.DataFrame({'Time': [now], 'Temp': [temp], 'Memory': [mem], 'Load': [util]})
         st.session_state.history = pd.concat([st.session_state.history, new_entry], ignore_index=True).iloc[-50:]
         
-        # Calculate deltas for a "Pro" look
+        # Calculate deltas
         prev_temp = st.session_state.history['Temp'].iloc[-2] if len(st.session_state.history) > 1 else temp
 
         # --- UI TOP SECTION ---
@@ -70,5 +70,5 @@ def render_gpu_data():
     else:
         st.error("No NVIDIA GPU detected.")
 
-# 5. Call the fragment
+# Call the fragment
 render_gpu_data()
