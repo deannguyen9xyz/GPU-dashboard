@@ -1,13 +1,22 @@
 # GPU-dashboard
 Monitors temperature, VRAM, and utilization with dynamic refresh rates and historical data tracking, using matplotli and streamlit.
 
---- 
+---
+
+## ⚙️ Requirements
+
+Install required libraries using:
+
+```
+pip install streamlit pandas pynvml
+```
+---
 
 ## ▶️ How to Run
 
 **nvidia_plt.py**: Run as normal python file.
 
-**nvidia_st**: python -m streamlit run nvidia_st.py
+**nvidia_st**: using follow command "python -m streamlit run nvidia_st.py"
 
 ---
 
